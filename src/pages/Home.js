@@ -2,7 +2,6 @@ import React from 'react';
 import logo from '../sumi.png';
 import QueryForm from '../components/QueryForm'
 import {
-    Alert,
     Container,
     Row,
     Col,
@@ -11,36 +10,18 @@ import {
     Nav,
     NavItem,
     NavLink,
-    NavbarToggler,
-    Collapse
 } from 'reactstrap';
 
-class HomePage extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            visible: false
-        };
-    }
-
-    onFormSubmit = (e) => {
-        e.preventDefault();
-        return (
-            console.log("submit detected"),
-            this.setState({visible: true})
-        )
-    }
-
-    onDismiss = (e) => {
-        e.preventDefault();
-        return (
-            this.setState({visible: false})
-        );
-    }
-
+class Home extends React.Component {
+    // constructor(props) {
+    //     super(props);
+    //     this.state = {
+    //         visible: false
+    //     };
+    // }
     render() {
         return (
-            <Container fluid='true'>
+            <Container fluid={true}>
                 <Row>
                     <Col>
                         <Navbar className="Navbar" color="light" light expand="md">
@@ -64,17 +45,11 @@ class HomePage extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <QueryForm onSubmit={this.onFormSubmit}/>
-                </Row>
-                <Row>
-                    <Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
-                        {this.state.query}
-                        {this.state.filters}
-                    </Alert>
+                    <QueryForm onChange={this.onFormSubmit}/>
                 </Row>
             </Container>
         );
     }
 }
 
-export default HomePage;
+export default Home ;

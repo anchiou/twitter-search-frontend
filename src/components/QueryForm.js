@@ -6,7 +6,6 @@ import {
     FormGroup,
     Label,
     Input,
-    FormText,
     Container,
     Row,
     Col,
@@ -18,16 +17,37 @@ class QueryForm extends React.Component {
         this.state = {
             query: "",
             filters: "English",
+            visible: false
         };
     }
 
+
     onFormSubmit = (e) => {
         e.preventDefault();
+        return (
+            console.log("submit detected"),
+            this.setState({visible: true})
+        )
+    }
+
+    onEnterKey = (e) => {
+        if(e.key === 'Enter') {
+            e.preventDefault();
+            console.log("enter key detected")
+            this.setState({visible: true});
+        }
+    }
+
+    onDismiss = (e) => {
+        e.preventDefault();
+        return (
+            this.setState({visible: false})
+        );
     }
 
     render() {
         return(
-            <Container>
+            <Container fluid={true}>
                 <Form>
                     <Row>
                         <Col>
@@ -40,7 +60,9 @@ class QueryForm extends React.Component {
                                     placeholder="Search tweets"
                                     onChange={e => this.setState(
                                         { query: e.target.value }
-                                    )}/>
+                                    )}
+                                    onKeyDown={this.onEnterKey}
+                                />
                             </FormGroup>
                         </Col>
                         <Col xs="2">
@@ -68,6 +90,12 @@ class QueryForm extends React.Component {
                     </Button>
                     </Row>
                 </Form>
+                <Row>
+                    <Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
+                        {this.state.query}
+                        {this.state.filters}
+                    </Alert>
+                </Row>
             </Container>
         );
     }
