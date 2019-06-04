@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-    Alert,
     Button,
     Form,
     FormGroup,
@@ -10,6 +9,7 @@ import {
     Row,
     Col,
 } from 'reactstrap';
+import TweetResult from '../components/TweetComponent.js'
 
 class QueryForm extends React.Component {
     constructor(props) {
@@ -36,13 +36,6 @@ class QueryForm extends React.Component {
             console.log("enter key detected")
             this.setState({visible: true});
         }
-    }
-
-    onDismiss = (e) => {
-        e.preventDefault();
-        return (
-            this.setState({visible: false})
-        );
     }
 
     render() {
@@ -91,10 +84,7 @@ class QueryForm extends React.Component {
                     </Row>
                 </Form>
                 <Row>
-                    <Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
-                        {this.state.query}
-                        {this.state.filters}
-                    </Alert>
+                    {this.state.visible && <TweetResult subreddit={this.state.query}/>}
                 </Row>
             </Container>
         );
@@ -102,3 +92,10 @@ class QueryForm extends React.Component {
 }
 
 export default QueryForm;
+
+/*
+<Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
+    {this.state.query}
+    {this.state.filters}
+</Alert>
+*/
