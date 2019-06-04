@@ -11,6 +11,7 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
+import ResultEntry from '../components/ResultEntry';
 
 class Home extends React.Component {
     // constructor(props) {
@@ -46,6 +47,9 @@ class Home extends React.Component {
                 </Row>
                 <Row>
                     <QueryForm onChange={this.onFormSubmit}/>
+                </Row>
+                <Row>
+                    <ResultEntry></ResultEntry>
                 </Row>
             </Container>
         );
