@@ -22,10 +22,12 @@ class TweetResult extends React.Component {
         else {
             lang = "ja";
         }
-        axios.post("localhost:8000/", {
+        axios.post("http://localhost:8080/search",
+            {
             query: this.props.query,
             lang: lang
-        })
+            }, {headers: {"Access-Control-Allow-Origin": "*" }}
+        )
         .then(res => {
             const tweets = res.map(obj => obj.data).sort((a, b) => b.likes - a.likes);
             this.setState({ tweets });
@@ -47,10 +49,10 @@ class TweetResult extends React.Component {
                 this.setState({tweets})
             }
             else {
-                axios.post("localhost:8000/", {
+                axios.post("http://localhost:8080/search", {
                     'query': this.props.query,
                     'lang': this.props.lang
-                })
+                }, {headers: {"Access-Control-Allow-Origin": "*" }})
                 .then(res => {
                     const tweets = res.map(obj => obj.data);
                     this.setState({ tweets });
@@ -59,10 +61,10 @@ class TweetResult extends React.Component {
         }
         else if ((this.props.lang !== prevProps.lang)
             || (this.props.query !== prevProps.query)) {
-            axios.post("localhost:8000/", {
+            axios.post("http://localhost:8080/search", {
                 query: this.props.query,
                 lang: this.props.lang
-            })
+            }, {headers: {"Access-Control-Allow-Origin": "*" }})
             .then(res => {
                 const tweets = res.map(obj => obj.data);
                 if (this.props.sortBy === "Most Liked") {
