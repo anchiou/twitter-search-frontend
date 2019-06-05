@@ -1,6 +1,7 @@
 import React from 'react';
 import logo from '../sumi.png';
 import QueryForm from '../components/QueryForm'
+import './Home.css'
 import {
     Container,
     Row,
@@ -27,7 +28,7 @@ class Home extends React.Component {
                     <Col>
                         <Navbar className="Navbar" color="light" light expand="md">
                             <NavbarBrand href="/">
-                                <img className="yakitori"
+                                <img className="sumi"
                                     src={logo}
                                     alt={logo}
                                     height="128"
@@ -46,10 +47,7 @@ class Home extends React.Component {
                     </Col>
                 </Row>
                 <Row>
-                    <QueryForm onChange={this.onFormSubmit}/>
-                </Row>
-                <Row>
-                    <ResultEntry></ResultEntry>
+                    <QueryForm/>
                 </Row>
             </Container>
         );

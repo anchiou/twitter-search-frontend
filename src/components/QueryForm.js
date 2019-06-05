@@ -16,17 +16,19 @@ class QueryForm extends React.Component {
         super(props);
         this.state = {
             query: "",
-            filters: "English",
-            visible: false
+            language: "English",
+            sortBy: "Most Relevant",
+            visible: false,
         };
     }
-
 
     onFormSubmit = (e) => {
         e.preventDefault();
         return (
             console.log("submit detected"),
-            this.setState({visible: true})
+            this.setState({
+                visible: true
+            })
         )
     }
 
@@ -34,14 +36,17 @@ class QueryForm extends React.Component {
         if(e.key === 'Enter') {
             e.preventDefault();
             console.log("enter key detected")
-            this.setState({visible: true});
+            this.setState({
+                visible: true
+            })
         }
     }
 
     render() {
         return(
+            <React.Fragment>
             <Container fluid={true}>
-                <Form>
+                <Form onSubmit={this.onFormSubmit}>
                     <Row>
                         <Col>
                             <FormGroup>
@@ -51,9 +56,9 @@ class QueryForm extends React.Component {
                                     name="q"
                                     id="query"
                                     placeholder="Search tweets"
-                                    onChange={e => this.setState(
-                                        { query: e.target.value }
-                                    )}
+                                    onChange={e =>
+                                        this.setState({query: e.target.value})
+                                    }
                                     onKeyDown={this.onEnterKey}
                                 />
                             </FormGroup>
@@ -65,37 +70,47 @@ class QueryForm extends React.Component {
                                     type="select"
                                     name="lang"
                                     id="language"
-                                    onChange={e => this.setState(
-                                        { filters: e.target.value }
-                                    )}>
+                                    onChange={e =>
+                                        this.setState({language: e.target.value})
+                                    }
+                                >
                                     <option>English</option>
                                     <option>French</option>
                                     <option>Japanese</option>
                                 </Input>
                             </FormGroup>
                         </Col>
+                        <Col xs="2">
+                            <FormGroup>
+                                <Label for="sortBy">Sort By</Label>
+                                <Input
+                                    type="select"
+                                    name="sort"
+                                    id="sortBy"
+                                    onChange={e =>
+                                        this.setState({sortBy: e.target.value})
+                                    }
+                                >
+                                    <option>Most Relevant</option>
+                                    <option>Most Liked</option>
+                                    <option>Most Retweeted</option>
+                                </Input>
+                            </FormGroup>
+                        </Col>
                     </Row>
                     <Row>
-                    <Button
-                        onClick={this.onFormSubmit}
-                        style={{marginLeft:15}}>
-                        Search
-                    </Button>
+                        <Col>
+                            <Button style={{marginBottom:15}}>
+                                Search
+                            </Button>
+                        </Col>
                     </Row>
                 </Form>
-                <Row>
-                    {this.state.visible && <TweetResult subreddit={this.state.query}/>}
-                </Row>
             </Container>
+            <TweetResult query={this.state.query} lang={this.state.language} sortBy={this.state.sortBy}/>
+            </React.Fragment>
         );
     }
 }
 
 export default QueryForm;
-
-/*
-<Alert color="info" isOpen={this.state.visible} toggle={this.onDismiss}>
-    {this.state.query}
-    {this.state.filters}
-</Alert>
-*/
