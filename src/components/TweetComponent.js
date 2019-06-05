@@ -12,9 +12,19 @@ class TweetResult extends React.Component {
     }
 
     componentDidMount() {
+        var lang = this.props.lang;
+        if (lang == "Standard") {
+            lang = "std";
+        }
+        else if (lang == "English") {
+            lang = "en";
+        }
+        else {
+            lang = "ja";
+        }
         axios.post("localhost:8000/", {
             query: this.props.query,
-            lang: this.props.lang
+            lang: lang
         })
         .then(res => {
             const tweets = res.map(obj => obj.data).sort((a, b) => b.likes - a.likes);
