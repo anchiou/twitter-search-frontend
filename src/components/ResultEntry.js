@@ -45,7 +45,7 @@ class ResultEntry extends React.Component {
                 <ListGroup>
                     <ListGroupItem>
                         <ListGroupItemHeading>
-                            <b>{this.state.name}</b>
+                            <b>{this.state.name}  </b>
                             {this.state.verified ?
                                 <img className="verifiedCheck"
                                     src={check}
@@ -57,7 +57,7 @@ class ResultEntry extends React.Component {
                             }
                             <small>
                                 @{this.state.screenname}
-                                <small>&bull;</small>
+                                <small>  &bull;  </small>
                                 {this.state.score}
                             </small>
                         </ListGroupItemHeading>
@@ -65,27 +65,27 @@ class ResultEntry extends React.Component {
                             {this.state.tweet}
                         </ListGroupItemText>
                         <ListGroupItemText>
-                        <img className="replies"
-                            src={reply}
-                            alt={reply}
-                            height="16"
-                            width="16"
-                            style={{marginRight:2}}
-                        /> {this.state.replies}
-                        <img className="heart"
-                            src={heart}
-                            alt={heart}
-                            height="16"
-                            width="16"
-                            style={{marginLeft:16, marginRight: 2}}
-                        /> {this.state.likes}
-                        <img className="rt"
-                            src={rt}
-                            alt={rt}
-                            height="16"
-                            width="16"
-                            style={{marginLeft:16, marginRight:6}}
-                        />{this.state.retweets}
+                            <img className="replies"
+                                src={reply}
+                                alt={reply}
+                                height="16"
+                                width="16"
+                                style={{marginRight:2}}
+                            /> {this.state.replies}{  }
+                            <img className="heart"
+                                src={heart}
+                                alt={heart}
+                                height="16"
+                                width="16"
+                                style={{marginLeft:16, marginRight: 2}}
+                            /> {this.state.likes}{  }
+                            <img className="rt"
+                                src={rt}
+                                alt={rt}
+                                height="16"
+                                width="16"
+                                style={{marginLeft:16, marginRight:6}}
+                            />{this.state.retweets}
                         </ListGroupItemText>
                     </ListGroupItem>
                 </ListGroup>

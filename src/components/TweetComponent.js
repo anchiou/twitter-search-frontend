@@ -1,12 +1,13 @@
 import React from 'react';
 import axios from 'axios';
 import ResultEntry from './ResultEntry.js'
-import {Container, Row} from 'reactstrap';
+import {Container} from 'reactstrap';
 
 function TweetList(props) {
     const tweets = props.tweets;
-    const listItems = tweets.map((tweet) =>
+    const listItems = tweets.map((tweet, i) =>
         <ResultEntry
+            key = {i}
             name={tweet.username}
             screenname={tweet.screen_name}
             tweet={tweet.text}
