@@ -3,20 +3,40 @@ import axios from 'axios';
 import ResultEntry from './ResultEntry.js'
 import {Container, Row} from 'reactstrap';
 
+function TweetList(props) {
+    const tweets = props.tweets;
+    const listItems = tweets.map((tweet) =>
+        <ResultEntry
+            name={tweet.username}
+            screenname={tweet.screen_name}
+            tweet={tweet.text}
+            likes={tweet.favorite_count}
+            retweets={tweet.retweet_count}
+            replies={tweet.reply_count}
+            verified={tweet.verified}
+            score={tweet.score}
+        />
+    );
+    return (
+        listItems
+    );
+}
+
 class TweetResult extends React.Component {
     constructor(props) {
         super(props);
+
         this.state = {
             tweets: []
         }
     }
 
-    componentDidMount() {
+    fetchData = () => {
         var lang = this.props.lang;
-        if (lang == "Standard") {
+        if (lang === "Standard") {
             lang = "std";
         }
-        else if (lang == "English") {
+        else if (lang === "English") {
             lang = "en";
         }
         else {
@@ -26,12 +46,16 @@ class TweetResult extends React.Component {
             {
             query: this.props.query,
             lang: lang
-            }, {headers: {"Access-Control-Allow-Origin": "*" }}
+            },
+            {headers: {"Access-Control-Allow-Origin": "*" }}
         )
         .then(res => {
-            const tweets = res.map(obj => obj.data).sort((a, b) => b.likes - a.likes);
-            this.setState({ tweets });
+            this.setState({ tweets: res.data.data })
         })
+    }
+
+    componentDidMount() {
+        this.fetchData();
     }
 
     componentDidUpdate(prevProps) {
@@ -52,10 +76,11 @@ class TweetResult extends React.Component {
                 axios.post("http://localhost:8080/search", {
                     'query': this.props.query,
                     'lang': this.props.lang
-                }, {headers: {"Access-Control-Allow-Origin": "*" }})
+                },
+                {headers: {"Access-Control-Allow-Origin": "*" }})
                 .then(res => {
-                    const tweets = res.map(obj => obj.data);
-                    this.setState({ tweets });
+                    console.log(res.data);
+                    this.setState({ tweets: res.data.data })
                 })
             }
         }
@@ -64,9 +89,10 @@ class TweetResult extends React.Component {
             axios.post("http://localhost:8080/search", {
                 query: this.props.query,
                 lang: this.props.lang
-            }, {headers: {"Access-Control-Allow-Origin": "*" }})
+            },
+            {headers: {"Access-Control-Allow-Origin": "*" }})
             .then(res => {
-                const tweets = res.map(obj => obj.data);
+                const tweets = res.data.data;
                 if (this.props.sortBy === "Most Liked") {
                     tweets.sort((a, b) => b.likes - a.likes);
                 }
@@ -81,22 +107,7 @@ class TweetResult extends React.Component {
     render() {
         return (
             <Container>
-                { this.state.tweets
-                    .map(tweet =>
-                        <div key={tweet.screenname}>
-                        <ResultEntry
-                            name={tweet.name}
-                            screenname={tweet.screenname}
-                            timestamp={tweet.timestamp}
-                            tweet={tweet.tweet}
-                            likes={tweet.likes}
-                            retweets={tweet.retweets}
-                            replies={tweet.replies}
-                            verified={tweet.verified}
-                        />
-                        </div>
-
-                )}
+                <TweetList tweets={this.state.tweets}/>
             </Container>
         );
     }

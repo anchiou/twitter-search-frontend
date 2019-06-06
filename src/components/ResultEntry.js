@@ -15,14 +15,14 @@ class ResultEntry extends React.Component {
         super();
 
         this.state = {
-            name: "First Last",
-            screenname: "screen_name",
-            timestamp: "2h",
-            tweet: "Hello World",
+            name: "",
+            screenname: "",
+            tweet: "",
             likes: 0,
             retweets: 0,
             replies: 0,
-            verified: true
+            verified: false,
+            score: 0
         }
     }
 
@@ -30,13 +30,12 @@ class ResultEntry extends React.Component {
         this.setState({
             name: this.props.name,
             screenname: this.props.screenname,
-            timestamp: this.props.timestamp,
             tweet: this.props.tweet,
             likes: this.props.likes,
             retweets: this.props.retweets,
             replies: this.props.replies,
-            verified: this.props.verified
-
+            verified: this.props.verified,
+            score: this.props.score
         });
     }
 
@@ -59,7 +58,7 @@ class ResultEntry extends React.Component {
                             <small>
                                 @{this.state.screenname}
                                 <small>&bull;</small>
-                                {this.state.timestamp}
+                                {this.state.score}
                             </small>
                         </ListGroupItemHeading>
                         <ListGroupItemText>

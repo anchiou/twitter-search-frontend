@@ -74,9 +74,9 @@ class QueryForm extends React.Component {
                                         this.setState({language: e.target.value})
                                     }
                                 >
-                                    <option>Standard</option>
                                     <option>English</option>
                                     <option>Japanese</option>
+                                    <option>Standard</option>
                                 </Input>
                             </FormGroup>
                         </Col>
