@@ -59,7 +59,10 @@ class TweetResult extends React.Component {
     }
 
     componentDidUpdate(prevProps) {
-        if ((this.props.sortBy !== prevProps.sortBy)
+        if (this.props.query !== prevProps.query) {
+            this.fetchData();
+        }
+        else if ((this.props.sortBy !== prevProps.sortBy)
             && (this.props.lang === prevProps.lang)
             && (this.props.query === prevProps.query)) {
             if (this.props.sortBy === "Most Liked") {
@@ -84,8 +87,7 @@ class TweetResult extends React.Component {
                 })
             }
         }
-        else if ((this.props.lang !== prevProps.lang)
-            || (this.props.query !== prevProps.query)) {
+        else if (this.props.lang !== prevProps.lang) {
             axios.post("http://localhost:8080/search", {
                 query: this.props.query,
                 lang: this.props.lang
