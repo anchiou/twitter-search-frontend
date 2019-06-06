@@ -1,0 +1,7 @@
+.float_center {
+    float: right;
+
+    position: relative;
+    left: -40%; /* or right 50% */
+    text-align: left;
+}

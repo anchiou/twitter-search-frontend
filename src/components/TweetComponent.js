@@ -3,6 +3,9 @@ import axios from 'axios';
 import ResultEntry from './ResultEntry.js'
 import {Container} from 'reactstrap';
 
+import loading from '../images/tonkatsu_cheer.gif';
+import './TweetComponent.css';
+
 function TweetList(props) {
     const tweets = props.tweets;
     const listItems = tweets.map((tweet, i) =>
@@ -28,11 +31,13 @@ class TweetResult extends React.Component {
         super(props);
 
         this.state = {
+            loading: false,
             tweets: []
         }
     }
 
     fetchData = () => {
+        this.setState({ loading: true });
         var lang = this.props.lang;
         if (lang === "Standard") {
             lang = "std";
@@ -51,7 +56,7 @@ class TweetResult extends React.Component {
             {headers: {"Access-Control-Allow-Origin": "*" }}
         )
         .then(res => {
-            this.setState({ tweets: res.data.data })
+            this.setState({ tweets: res.data.data, loading: false })
         })
     }
 
@@ -110,6 +115,9 @@ class TweetResult extends React.Component {
     render() {
         return (
             <Container>
+                <div class="float_center">
+                    {this.state.loading && <img src={loading} alt="searching..."/>}
+                </div>
                 <TweetList tweets={this.state.tweets}/>
             </Container>
         );

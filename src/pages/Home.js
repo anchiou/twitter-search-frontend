@@ -1,5 +1,5 @@
 import React from 'react';
-import logo from '../sumi.png';
+import logo from '../images/sumikko_speech_bubble.png';
 import QueryForm from '../components/QueryForm'
 import './Home.css'
 import {
@@ -12,21 +12,14 @@ import {
     NavItem,
     NavLink,
 } from 'reactstrap';
-import ResultEntry from '../components/ResultEntry';
 
 class Home extends React.Component {
-    // constructor(props) {
-    //     super(props);
-    //     this.state = {
-    //         visible: false
-    //     };
-    // }
     render() {
         return (
             <Container fluid={true}>
                 <Row>
                     <Col>
-                        <Navbar className="Navbar" color="light" light expand="md">
+                        <Navbar color="light" light expand="md">
                             <NavbarBrand href="/">
                                 <img className="sumi"
                                     src={logo}
@@ -34,7 +27,7 @@ class Home extends React.Component {
                                     height="128"
                                     width="128"
                                     style={{marginRight:20}} />
-                                SumiSearch
+                                <b>SumiSearch</b>
                             </NavbarBrand>
                                 <Nav className="ml-auto" navbar>
                                     <NavItem>
@@ -46,8 +39,8 @@ class Home extends React.Component {
                         </Navbar>
                     </Col>
                 </Row>
-                <Row>
-                    <QueryForm/>
+                <Row className="QueryRow">
+                        <QueryForm/>
                 </Row>
             </Container>
         );

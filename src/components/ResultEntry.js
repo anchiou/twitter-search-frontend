@@ -5,10 +5,10 @@ import {
     ListGroupItemHeading,
     ListGroupItemText
 } from 'reactstrap';
-import check from '../Twitter_Verified_Badge.svg'
-import heart from '../Twitter_Heart.svg'
-import reply from '../Twitter_Reply.svg'
-import rt from '../Twitter_Retweet.svg'
+import check from '../images/Twitter_Verified_Badge.svg'
+import heart from '../images/Twitter_Heart.svg'
+import reply from '../images/Twitter_Reply.svg'
+import rt from '../images/Twitter_Retweet.svg'
 
 class ResultEntry extends React.Component {
     constructor(props) {

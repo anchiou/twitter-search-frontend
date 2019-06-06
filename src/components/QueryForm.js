@@ -109,7 +109,13 @@ class QueryForm extends React.Component {
                     </Row>
                 </Form>
             </Container>
-            {this.state.visible && <TweetResult query={this.state.query} lang={this.state.language} sortBy={this.state.sortBy}/>}
+                {this.state.visible &&
+                    <TweetResult
+                        query={this.state.query}
+                        lang={this.state.language}
+                        sortBy={this.state.sortBy}
+                    />
+                }
             </React.Fragment>
         );
     }
