@@ -4,6 +4,7 @@ import ResultEntry from './ResultEntry.js'
 import {Container} from 'reactstrap';
 
 import loading from '../images/tonkatsu_cheer.gif';
+import noResults from '../images/no_result_found.gif';
 import './TweetComponent.css';
 
 function TweetList(props) {
@@ -32,12 +33,13 @@ class TweetResult extends React.Component {
 
         this.state = {
             loading: false,
+            noResults: false,
             tweets: []
         }
     }
 
     fetchData = () => {
-        this.setState({ loading: true });
+        this.setState({ loading: true, noResults: false });
         var lang = this.props.lang;
         if (lang === "Standard") {
             lang = "std";
@@ -56,6 +58,10 @@ class TweetResult extends React.Component {
             {headers: {"Access-Control-Allow-Origin": "*" }}
         )
         .then(res => {
+            const data = res.data.data;
+            if (data === undefined || data.length === 0) {
+                this.setState({ noResults: true });
+            }
             this.setState({ tweets: res.data.data, loading: false })
         })
     }
@@ -115,9 +121,16 @@ class TweetResult extends React.Component {
     render() {
         return (
             <Container>
-                <div class="float_center">
-                    {this.state.loading && <img src={loading} alt="searching..."/>}
+                <div class="center_loading">
+                    {this.state.loading &&
+                        <img src={loading} alt="Searching..."/>}
                 </div>
+                {this.state.noResults &&
+                    <div class="center_noresults">
+                        <b>No results found</b>
+                        <img src={noResults} alt="No results found"/>
+                    </div>
+                }
                 <TweetList tweets={this.state.tweets}/>
             </Container>
         );
