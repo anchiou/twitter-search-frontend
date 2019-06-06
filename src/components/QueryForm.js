@@ -57,7 +57,7 @@ class QueryForm extends React.Component {
                                     id="query"
                                     placeholder="Search tweets"
                                     onChange={e =>
-                                        this.setState({query: e.target.value})
+                                        this.setState({ query: e.target.value, visible: false })
                                     }
                                     onKeyDown={this.onEnterKey}
                                 />
@@ -100,7 +100,9 @@ class QueryForm extends React.Component {
                     </Row>
                     <Row>
                         <Col>
-                            <Button style={{marginBottom:15}}>
+                            <Button
+                                style={{marginBottom:15}}
+                                onClick={this.handleSubmit}>
                                 Search
                             </Button>
                         </Col>
