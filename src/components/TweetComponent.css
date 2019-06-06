@@ -1,0 +1,15 @@
+.center_loading {
+    float: right;
+
+    position: relative;
+    left: -40%;
+    text-align: left;
+}
+
+.center_noresults {
+    float: right;
+
+    position: relative;
+    left: -25%; /* or right 50% */
+    text-align: left;
+}
